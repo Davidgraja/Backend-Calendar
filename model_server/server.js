@@ -10,12 +10,13 @@ class Server {
         
         //? server paths 
         this.paths = {
-            auth : '/api/auth'
+            auth : '/api/auth',
+            events :'/api/events'
         }
 
         this.conectDatabase();
         this.middlewares();
-        this.routes()
+        this.routes();
     }
 
     async conectDatabase() {
@@ -31,13 +32,13 @@ class Server {
     }
 
     routes() {
-        this.app.use( this.paths.auth  , require('../routes/auth') )
-
+        this.app.use( this.paths.auth  , require('../routes/auth') );
+        this.app.use( this.paths.events , require('../routes/events'))
     }
 
     listen() {
         this.app.listen(this.port , ()=>{
-            console.log(`server listening in the port : ${ this.port } `)
+            console.log(`server listening in the port : ${ this.port } `);
         })
     }
 
