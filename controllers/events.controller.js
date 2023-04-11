@@ -2,11 +2,13 @@ const { request, response } = require("express");
 const Event = require('../models/Event');
 
 
-const getEvents = ( req = request , res = response ) => {
+const getEvents = async ( req = request , res = response ) => {
+
+    const events = await Event.find().populate('user' , 'name');
 
     res.json({
         ok : true,
-        message : 'get events'
+        events
     });
 
 }
@@ -40,27 +42,60 @@ const createEvent = async ( req = request , res = response ) => {
     
 }
 
-const updateEvent = ( req = request , res = response ) => {
+const updateEvent = async ( req = request , res = response ) => {
 
     const { id } = req.params;
 
-    res.json({
-        ok : true,
-        message : 'update event',
-        id 
-    });
+    try {
+        
+        const eventData = {
+            ...req.body,
+            user : req.user.uid
+        }
+
+        const eventUpdated =  await Event.findByIdAndUpdate(id , eventData , {new : true} );
+
+        res.json({
+            ok : true,
+            event : eventUpdated
+        })
+
+        
+    } catch (error) {
+        
+        console.log(error);
+        
+        res.status(500).json({
+            ok : false ,
+            message : 'Comuniquese con el administrador'
+        });
+
+    }
 
 }
 
-const deleteEvent = ( req = request , res = response ) => {
+const deleteEvent = async ( req = request , res = response ) => {
 
     const { id } = req.params;
 
-    res.json({
-        ok : true,
-        message : 'delete event',
-        id 
-    });
+    try {
+
+        await Event.findByIdAndRemove(id);
+    
+        res.json({
+            ok : true
+        });
+        
+    } catch (error) {
+        
+        console.log(error);
+
+        res.status(500).json({
+            ok : false,
+            message : 'Comuniquese con el administrador'
+        });
+        
+    }
 
 }
 

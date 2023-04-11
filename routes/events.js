@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const { getEvents , createEvent , updateEvent , deleteEvent } = require('../controllers/events.controller');
-const { validateJWT, validateFields } = require('../middlewares');
+const { validateJWT, validateFields , validationsToEvent } = require('../middlewares');
 const { check } = require('express-validator');
 const { isDate } = require('../helpers/isDate');
 
@@ -13,7 +13,7 @@ const { isDate } = require('../helpers/isDate');
 const router = Router();
 
 //? Middleware of high level
-router.use( validateJWT )
+router.use( validateJWT );
 
 
 router.get('/', getEvents);
@@ -29,12 +29,17 @@ router.post('/' , [
 
 router.put('/:id' , [
     check('id' , 'El id no es valido').isMongoId(),
-    validateFields
+    check('title' , ' el titulo es obligatorio').notEmpty(),
+    check('start' , 'La fecha de inicio es obligatoria').custom( isDate ),
+    check('end' , 'La fecha de finalización es obligatoria').custom( isDate ),
+    validateFields,
+    validationsToEvent
 ] , updateEvent);
 
 router.delete('/:id',[
     check('id' , 'El id no es valido').isMongoId(),
-    validateFields
+    validateFields,
+    validationsToEvent
 ] , deleteEvent);
 
 module.exports = router;
