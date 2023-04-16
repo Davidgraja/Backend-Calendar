@@ -15,7 +15,7 @@ router.get('/renew', validateJWT , renewToken);
 router.post('/new' , [
     check('name' , 'El nombre es obligatorio').notEmpty(),
     check('name' , 'El nombre debe de tener al menos 4 caracteres').isLength({min:4}),
-    check('email' , 'El email es obligatorio').isEmail(),
+    check('email' , 'El email es obligatorio, Por favor verifiquelo').isEmail(),
     check('password' , 'El password es obligatorio y de al menos 6 caracteres').isLength({ min: 6 }),
     validateFields
 ], registerUser);
