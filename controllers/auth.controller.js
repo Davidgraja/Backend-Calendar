@@ -21,7 +21,7 @@ const renewToken = async ( req = request , res = response ) => {
         
         return res.status(500).json({
             ok : false ,
-            message: 'por favor hable con el administrador'
+            msg: 'por favor hable con el administrador'
         })
     
     }
@@ -40,7 +40,7 @@ const registerUser = async ( req = request , res = response ) => {
         if(usuario){
             return res.status(400).json({
                 ok: false,
-                message : 'Ya existe un usuario con ese email'
+                msg : 'Ya existe un usuario con ese email'
             })
         }
         
@@ -67,7 +67,7 @@ const registerUser = async ( req = request , res = response ) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            message : 'Por favor hable con el administrador'
+            msg: 'Por favor hable con el administrador'
         });
 
     }
@@ -79,7 +79,7 @@ const loginUser = async ( req = request , res = response ) => {
     
     const answerDenied = {
         ok: false,
-        message : 'email o contraseña incorrectas'
+        msg : 'email o contraseña incorrectas'
     };
 
     const { email , password } = req.body;
@@ -117,7 +117,7 @@ const loginUser = async ( req = request , res = response ) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            message : 'Por favor hable con el administrador'
+            msg : 'Por favor hable con el administrador'
         });
 
     }

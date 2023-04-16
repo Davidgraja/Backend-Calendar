@@ -13,7 +13,7 @@ const validationsToEvent = async ( req = request , res = response , next ) => {
         
             return res.status(400).json({
                 ok : false ,
-                message : 'El id no se encuentra en la base de datos'
+                msg : 'El id no se encuentra en la base de datos'
             });
         
         }
@@ -22,7 +22,7 @@ const validationsToEvent = async ( req = request , res = response , next ) => {
 
             return res.status(401).json({
                 ok : false ,
-                message : 'No tiene privilegio de modifcar este evento'
+                msg : 'No tiene privilegio de modifcar este evento'
             });
 
         }
@@ -35,7 +35,7 @@ const validationsToEvent = async ( req = request , res = response , next ) => {
         
         res.status(500).json({
             ok : false ,
-            message : 'Comuniquese con el administrador'
+            msg : 'Comuniquese con el administrador'
         });
 
     }

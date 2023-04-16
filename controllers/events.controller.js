@@ -33,7 +33,7 @@ const createEvent = async ( req = request , res = response ) => {
 
         res.status(500).json({
             ok : false ,
-            message : 'Hable con el administrador'
+            msg : 'Hable con el administrador'
         })
 
     }
@@ -67,7 +67,7 @@ const updateEvent = async ( req = request , res = response ) => {
         
         res.status(500).json({
             ok : false ,
-            message : 'Comuniquese con el administrador'
+            msg : 'Comuniquese con el administrador'
         });
 
     }
@@ -92,7 +92,7 @@ const deleteEvent = async ( req = request , res = response ) => {
 
         res.status(500).json({
             ok : false,
-            message : 'Comuniquese con el administrador'
+            msg : 'Comuniquese con el administrador'
         });
         
     }
