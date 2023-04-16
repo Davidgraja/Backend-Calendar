@@ -12,6 +12,8 @@ const renewToken = async ( req = request , res = response ) => {
     
         return res.json({
             ok : true,
+            uid , 
+            name,
             token
         })
         
