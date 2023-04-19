@@ -22,7 +22,7 @@ const validationsToEvent = async ( req = request , res = response , next ) => {
 
             return res.status(401).json({
                 ok : false ,
-                msg : 'No tiene privilegio de modifcar este evento'
+                msg : 'No tiene privilegio de modificar este evento'
             });
 
         }
