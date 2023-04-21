@@ -11,7 +11,8 @@ class Server {
         //? server paths 
         this.paths = {
             auth : '/api/auth',
-            events :'/api/events'
+            events :'/api/events',
+            wildCard:'*'
         }
 
         this.conectDatabase();
@@ -33,7 +34,8 @@ class Server {
 
     routes() {
         this.app.use( this.paths.auth  , require('../routes/auth') );
-        this.app.use( this.paths.events , require('../routes/events'))
+        this.app.use( this.paths.events , require('../routes/events'));
+        this.app.use( this.paths.wildCard , require('../routes/wildCard'));
     }
 
     listen() {
